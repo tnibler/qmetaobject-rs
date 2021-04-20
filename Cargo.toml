@@ -8,3 +8,7 @@ members = [
     'examples/qmlextensionplugins',
     'examples/webengine',
 ]
+
+
+[profile.dev]
+rpath = true  # So the examples run on the CI with macos
