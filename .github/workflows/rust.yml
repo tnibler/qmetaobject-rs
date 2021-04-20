@@ -14,7 +14,6 @@ jobs:
   build:
     env:
       QT_QPA_PLATFORM: offscreen
-      DYLD_FRAMEWORK_PATH: /Users/runner/work/qmetaobject-rs/Qt/5.15.2/clang_64/lib
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -45,5 +44,10 @@ jobs:
         version: ${{ matrix.qt }}
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
         modules: 'qtwebengine'
+    - name: Set macos paths
+      if: matrix.os == 'macos-latest'
+      run: |
+          echo "DYLD_FRAMEWORK_PATH=/Users/runner/work/qmetaobject-rs/Qt/5.15.2/clang_64/lib" >>  $GITHUB_ENV
+          echo "LD_LIBRARY_PATH=/Users/runner/work/qmetaobject-rs/Qt/5.15.2/clang_64/lib" >> $GITHUB_ENV
     - name: Run tests
       run: cargo test --all-features
