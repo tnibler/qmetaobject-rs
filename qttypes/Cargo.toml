@@ -21,6 +21,8 @@ required = []
 qtquick = []
 # Link against QtWebEngine
 qtwebengine = []
+# Link against QtQuickControls2
+qtquickcontrols2 = []
 
 default = ["required"]
 
